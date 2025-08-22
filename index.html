@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linux Space Explorer</title>
+    <link rel="stylesheet" href="style.css"> 
+</head>
+<body>
+    <div class="crt-overlay"></div>
+    <div class="terminal-container">
+        <div class="header">
+            <div class="logo">ODYSSEY 7 - BACKUP TERMINAL</div>
+            <div>EMERGENCY SYSTEMS ONLINE</div>
+        </div>
+
+        <div class="status-bar">
+            <div class="status-item">
+                <div id="life-support-indicator" class="status-indicator status-critical"></div>
+                <span id="life-support-status">LIFE SUPPORT: CRITICAL</span>
+            </div>
+            <div class="status-item">
+                <div id="power-indicator" class="status-indicator status-warning"></div>
+                <span id="power-status">POWER: 23%</span>
+            </div>
+            <div class="status-item">
+                <div id="navigation-indicator" class="status-indicator status-critical"></div>
+                <span id="navigation-status">NAVIGATION: OFFLINE</span>
+            </div>
+            <div class="status-item">
+                <div id="comms-indicator" class="status-indicator status-critical"></div>
+                <span id="comms-status">COMMS: OFFLINE</span>
+            </div>
+        </div>
+
+        <div class="terminal-split">
+            <div id="terminal"></div>
+            <div class="right-panel">
+                // ... existing code ...
+                <div class="story-panel">
+                    <div class="story-messages" id="story-messages">
+                        <!-- Story messages will be populated by script.js -->
+                    </div>
+                    <div class="objective-panel">
+                        <h3>Current Objective</h3>
+                        <div id="objective-text"></div>
+                    </div>
+                </div>
+                <div class="chat-panel">
+                    <div class="chat-messages" id="chat-messages">
+                        {/* Initial chat messages will be populated by script.js */}
+                    </div>
+                    <div class="chat-input-container">
+                        <input type="text" class="chat-input" id="chat-input" placeholder="Chat with AURORA...">
+                        <button class="chat-send" id="chat-send">SEND</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="command-line">
+            <span id="command-prompt">user@odyssey7:~$</span>
+            <div id="command-input-container">
+                <input type="text" id="command-input" autofocus>
+                <div id="cursor"></div>
+            </div>
+        </div>
+
+        <div id="voice-indicator" class="voice-indicator" style="display: none;">
+            AURORA SPEAKING
+            <div class="voice-waves">
+                <div class="voice-wave"></div>
+                <div class="voice-wave"></div>
+                <div class="voice-wave"></div>
+                <div class="voice-wave"></div>
+            </div>
+        </div>
+
+        <div class="control-buttons">
+            <select id="theme-selector" class="control-button">
+                <option value="default">Default Theme</option>
+                <option value="c64">Commodore 64</option>
+                <option value="dos">DOS Terminal</option>
+                <option value="linux">Linux Terminal</option>
+                <option value="appleii">Apple II+</option>
+            </select>
+            <button id="help-button" class="control-button">HELP</button>
+            <button id="voice-control" class="control-button">MUTE VOICE</button>
+        </div>
+
+        <div id="help-panel" class="help-panel">
+            <h3>Available Commands (Basic)</h3>
+            <ul id="help-commands-list">
+                <li><code>pwd</code> - Print Working Directory</li>
+                <li><code>ls [-la]</code> - List files/directories</li>
+                <li><code>cd [directory]</code> - Change Directory</li>
+                <li><code>cat [file]</code> - View file contents</li>
+                <li><code>clear</code> - Clear terminal</li>
+                <li><code>echo [text]</code> - Display text</li>
+                <li><code>help</code> - Show/hide this panel</li>
+            </ul>
+            <p>More commands will become available as systems are repaired.</p>
+        </div>
+    </div>
+
+    <script src="gameState.js"></script>
+    <script src="dom.js"></script>
+    <script src="fileSystemUtils.js"></script>
+    <script src="uiUpdates.js"></script>
+    <script src="js/gameLogic.js"></script> 
+    <script src="js/chapters/beginner.js"></script>
+    <script src="js/chapters/intermediate.js"></script>
+    <script src="js/chapters/advanced.js"></script>
+    <script src="speech.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

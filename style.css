@@ -1,0 +1,659 @@
+/* --- Global Styles & Font --- */
+@font-face {
+    font-family: 'VT323';
+    src: url('https://fonts.gstatic.com/s/vt323/v17/pxiKyp0ihIEF2isfFJU.woff2') format('woff2');
+}
+
+/* --- Theme Variables --- */
+:root {
+    --terminal-bg-color: #000;
+    --terminal-text-color: #0f0;
+    --terminal-link-color: #0ff;
+    --terminal-prompt-color: #0f0;
+    --terminal-cursor-color: #0f0;
+    --terminal-error-color: #f00;
+    --terminal-warning-color: #ff0; /* Yellow */
+    --terminal-system-message-color: #0f0;
+    --terminal-aurora-message-color: #0f0;
+    --terminal-player-message-color: #0f0; /* Can be different */
+    --terminal-border-color: #0f0;
+    --terminal-shadow-color: #0f0;
+    --terminal-shadow-inset-color: rgba(0, 255, 0, 0.2);
+    --terminal-font-family: 'VT323', monospace;
+    --terminal-font-size: 16px;
+    --terminal-crt-scanline-opacity: 0.2;
+    --terminal-scrollbar-thumb-color: #0f0;
+    --terminal-scrollbar-track-color: #000;
+    --objective-bg-color: rgba(0, 255, 0, 0.1);
+    --objective-border-color: #0f0;
+    --button-text-color: #0f0;
+    --button-border-color: #0f0;
+    --button-shadow-color: #0f0;
+    --button-hover-bg-color: rgba(0, 255, 0, 0.2);
+    --header-text-color: #0f0;
+    --status-bar-bg-color: #000;
+    --status-bar-text-color: #0f0;
+    --status-bar-border-color: #0f0;
+}
+
+body[data-theme="c64"] {
+    --terminal-bg-color: #0000AA; /* Dark Blue */
+    --terminal-text-color: #88CCFF; /* Light Blue/Cyan */
+    --terminal-link-color: #FFFF55; /* Yellow for links */
+    --terminal-prompt-color: #88CCFF;
+    --terminal-cursor-color: #88CCFF;
+    --terminal-error-color: #FF8888; /* Light Red */
+    --terminal-warning-color: #FFFF55; /* Yellow */
+    --terminal-system-message-color: #DDDDDD; /* Light Grey */
+    --terminal-aurora-message-color: #88CCFF;
+    --terminal-player-message-color: #FFFFFF; /* White */
+    --terminal-border-color: #88CCFF;
+    --terminal-shadow-color: #88CCFF;
+    --terminal-shadow-inset-color: rgba(136, 204, 255, 0.2);
+    --terminal-font-family: 'Courier New', Courier, monospace; /* C64 used a pixel font, Courier is a fallback */
+    --terminal-crt-scanline-opacity: 0.15;
+    --terminal-scrollbar-thumb-color: #88CCFF;
+    --terminal-scrollbar-track-color: #0000AA;
+    --objective-bg-color: rgba(136, 204, 255, 0.1);
+    --objective-border-color: #88CCFF;
+    --button-text-color: #88CCFF;
+    --button-border-color: #88CCFF;
+    --button-shadow-color: #88CCFF;
+    --button-hover-bg-color: rgba(136, 204, 255, 0.2);
+    --header-text-color: #88CCFF;
+    --status-bar-bg-color: #0000AA;
+    --status-bar-text-color: #88CCFF;
+    --status-bar-border-color: #88CCFF;
+}
+
+body[data-theme="dos"] {
+    --terminal-bg-color: #000000;
+    --terminal-text-color: #00FF00; /* Classic Green */
+    /* Alternative: --terminal-text-color: #FFA500; Amber */
+    --terminal-link-color: #FFFF00; /* Yellow for links */
+    --terminal-prompt-color: #00FF00;
+    --terminal-cursor-color: #00FF00;
+    --terminal-error-color: #FF4136; /* Red */
+    --terminal-warning-color: #FFDC00; /* Yellow */
+    --terminal-system-message-color: #AAAAAA; /* Grey */
+    --terminal-aurora-message-color: #00FF00;
+    --terminal-player-message-color: #FFFFFF; /* White */
+    --terminal-border-color: #00AA00; /* Darker Green */
+    --terminal-shadow-color: #00FF00;
+    --terminal-shadow-inset-color: rgba(0, 255, 0, 0.1);
+    --terminal-font-family: 'Lucida Console', 'Courier New', Courier, monospace;
+    --terminal-crt-scanline-opacity: 0.1;
+    --terminal-scrollbar-thumb-color: #00FF00;
+    --terminal-scrollbar-track-color: #000000;
+    --objective-bg-color: rgba(0, 255, 0, 0.05);
+    --objective-border-color: #00AA00;
+    --button-text-color: #00FF00;
+    --button-border-color: #00AA00;
+    --button-shadow-color: #00FF00;
+    --button-hover-bg-color: rgba(0, 255, 0, 0.15);
+    --header-text-color: #00FF00;
+    --status-bar-bg-color: #000000;
+    --status-bar-text-color: #00FF00;
+    --status-bar-border-color: #00AA00;
+}
+
+body[data-theme="linux"] {
+    --terminal-bg-color: #1E1E1E; /* Dark Grey/Black */
+    --terminal-text-color: #DCDCDC; /* Light Grey/White */
+    --terminal-link-color: #4FC3F7; /* Light Blue for links */
+    --terminal-prompt-color: #76FF03; /* Green prompt like Ubuntu */
+    --terminal-cursor-color: #DCDCDC;
+    --terminal-error-color: #FF5252; /* Red */
+    --terminal-warning-color: #FFCA28; /* Amber/Yellow */
+    --terminal-system-message-color: #A0A0A0; /* Medium Grey */
+    --terminal-aurora-message-color: #DCDCDC;
+    --terminal-player-message-color: #FFFFFF; /* White */
+    --terminal-border-color: #555555; /* Grey */
+    --terminal-shadow-color: transparent; /* Often no glow on modern linux terms */
+    --terminal-shadow-inset-color: rgba(220, 220, 220, 0.05);
+    --terminal-font-family: 'Ubuntu Mono', 'DejaVu Sans Mono', 'Consolas', monospace;
+    --terminal-crt-scanline-opacity: 0; /* Typically no scanlines */
+    --terminal-scrollbar-thumb-color: #555555;
+    --terminal-scrollbar-track-color: #1E1E1E;
+    --objective-bg-color: rgba(220, 220, 220, 0.05);
+    --objective-border-color: #555555;
+    --button-text-color: #DCDCDC;
+    --button-border-color: #555555;
+    --button-shadow-color: transparent;
+    --button-hover-bg-color: rgba(220, 220, 220, 0.1);
+    --header-text-color: #76FF03;
+    --status-bar-bg-color: #1E1E1E;
+    --status-bar-text-color: #DCDCDC;
+    --status-bar-border-color: #555555;
+}
+
+body[data-theme="appleii"] {
+    --terminal-bg-color: #000000;
+    --terminal-text-color: #30FF30; /* Bright Green */
+    --terminal-link-color: #80FF80; /* Lighter Green */
+    --terminal-prompt-color: #30FF30;
+    --terminal-cursor-color: #30FF30;
+    --terminal-error-color: #FFFFFF; /* White for errors (often monochrome) */
+    --terminal-warning-color: #FFFFFF;
+    --terminal-system-message-color: #A0FFA0; /* Paler Green */
+    --terminal-aurora-message-color: #30FF30;
+    --terminal-player-message-color: #FFFFFF;
+    --terminal-border-color: #30FF30;
+    --terminal-shadow-color: #30FF30;
+    --terminal-shadow-inset-color: rgba(48, 255, 48, 0.15);
+    --terminal-font-family: 'Courier New', Courier, monospace; /* Apple II had specific pixel fonts, Courier is fallback */
+    --terminal-crt-scanline-opacity: 0.1;
+    --terminal-scrollbar-thumb-color: #30FF30;
+    --terminal-scrollbar-track-color: #000000;
+    --objective-bg-color: rgba(48, 255, 48, 0.1);
+    --objective-border-color: #30FF30;
+    --button-text-color: #30FF30;
+    --button-border-color: #30FF30;
+    --button-shadow-color: #30FF30;
+    --button-hover-bg-color: rgba(48, 255, 48, 0.2);
+    --header-text-color: #30FF30;
+    --status-bar-bg-color: #000000;
+    --status-bar-text-color: #30FF30;
+    --status-bar-border-color: #30FF30;
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-color: var(--terminal-bg-color); /* Use variable */
+    overflow: hidden;
+    font-family: var(--terminal-font-family);
+    font-size: var(--terminal-font-size);
+    color: var(--terminal-text-color); /* Global text color for body */
+}
+
+/* --- CRT Screen Effects --- */
+.crt-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+    background-size: 100% 4px; /* Simulates scanlines */
+    z-index: 10;
+    pointer-events: none;
+    opacity: var(--terminal-crt-scanline-opacity); /* Use variable */
+}
+
+.crt-overlay::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, transparent 50%, rgba(0, 0, 0, 0.5) 100%); /* Vignette effect */
+    pointer-events: none;
+}
+
+/* --- Main Layout Containers --- */
+.terminal-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- Header Section (ODYSSEY 7 Logo) --- */
+.header {
+    text-align: center;
+    margin-bottom: 20px;
+    color: var(--header-text-color); /* Use variable */
+    text-shadow: 0 0 5px var(--header-text-color); /* Use variable */
+}
+
+.logo {
+    font-size: 28px;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+}
+
+/* --- Status Bar (Ship Systems) --- */
+.status-bar {
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--status-bar-bg-color); /* Use variable */
+    color: var(--status-bar-text-color); /* Use variable */
+    padding: 5px 10px;
+    font-size: 16px;
+    border-top: 1px solid var(--status-bar-border-color); /* Use variable */
+    border-bottom: 1px solid var(--status-bar-border-color); /* Use variable */
+}
+
+.status-item {
+    display: flex;
+    align-items: center;
+}
+
+.status-indicator { /* Base for system status lights */
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+.status-critical { /* Red light - critical */
+    background-color: #f00;
+    box-shadow: 0 0 5px #f00;
+    animation: blink 1s infinite;
+}
+
+.status-warning { /* Yellow light - warning */
+    background-color: #ff0;
+    box-shadow: 0 0 5px #ff0;
+}
+
+.status-ok { /* Green light - ok */
+    background-color: #0f0;
+    box-shadow: 0 0 5px #0f0;
+}
+
+/* --- Main Content Split (Terminal Left, Panels Right) --- */
+.terminal-split {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
+
+/* --- Terminal Output Area --- */
+#terminal {
+    flex: 2; /* Terminal takes more space than right panel */
+    background-color: var(--terminal-bg-color);
+    color: var(--terminal-text-color);
+    text-shadow: 0 0 2px var(--terminal-text-color);
+    font-size: var(--terminal-font-size);
+    line-height: 1.4;
+    padding: 10px;
+    border: 1px solid var(--terminal-border-color);
+    box-shadow: 0 0 10px var(--terminal-shadow-color), inset 0 0 10px var(--terminal-shadow-inset-color);
+    overflow-y: auto;
+    white-space: pre-wrap;
+    font-family: var(--terminal-font-family); /* Ensure terminal font is also themed */
+}
+
+/* --- Right Panel (Story & Chat) --- */
+.right-panel {
+    flex: 1;
+    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+/* --- Story Panel (Objectives & AURORA Messages) --- */
+.story-panel {
+    height: 50%;
+    background-color: var(--terminal-bg-color);
+    color: var(--terminal-text-color);
+    padding: 15px;
+    border: 1px solid var(--terminal-border-color);
+    box-shadow: 0 0 10px var(--terminal-shadow-color), inset 0 0 10px var(--terminal-shadow-inset-color);
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+    overflow: hidden;
+    font-family: var(--terminal-font-family);
+}
+
+.story-messages { /* Scrollable area for AURORA/System messages in story panel */
+    flex: 1;
+    overflow-y: auto;
+    margin-bottom: 10px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--terminal-scrollbar-thumb-color) var(--terminal-scrollbar-track-color);
+}
+
+.story-messages::-webkit-scrollbar { /* Webkit scrollbar styling */
+    width: 8px;
+}
+
+.story-messages::-webkit-scrollbar-track {
+    background: var(--terminal-scrollbar-track-color);
+}
+
+.story-messages::-webkit-scrollbar-thumb {
+    background-color: var(--terminal-scrollbar-thumb-color);
+    border-radius: 10px;
+    border: 2px solid var(--terminal-scrollbar-track-color);
+}
+
+/* --- Chat Panel (Player & AURORA Chat) --- */
+.chat-panel {
+    height: 50%;
+    background-color: var(--terminal-bg-color);
+    color: var(--terminal-text-color);
+    padding: 15px;
+    border: 1px solid var(--terminal-border-color);
+    box-shadow: 0 0 10px var(--terminal-shadow-color), inset 0 0 10px var(--terminal-shadow-inset-color);
+    display: flex;
+    flex-direction: column;
+    font-family: var(--terminal-font-family);
+}
+
+.chat-messages { /* Scrollable area for chat messages */
+    flex: 1;
+    overflow-y: auto;
+    margin-bottom: 10px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--terminal-scrollbar-thumb-color) var(--terminal-scrollbar-track-color);
+}
+
+.chat-messages::-webkit-scrollbar { /* Webkit scrollbar styling */
+    width: 8px;
+}
+
+.chat-messages::-webkit-scrollbar-track {
+    background: var(--terminal-scrollbar-track-color);
+}
+
+.chat-messages::-webkit-scrollbar-thumb {
+    background-color: var(--terminal-scrollbar-thumb-color);
+    border-radius: 10px;
+    border: 2px solid var(--terminal-scrollbar-track-color);
+}
+
+.chat-input-container { /* Container for chat input field and send button */
+    display: flex;
+    border: 1px solid var(--terminal-border-color);
+    box-shadow: 0 0 5px var(--terminal-shadow-color);
+    min-height: 30px;
+}
+
+.chat-input { /* Chat text input field */
+    flex: 1;
+    background-color: var(--terminal-bg-color);
+    border: none;
+    color: var(--terminal-text-color);
+    font-family: var(--terminal-font-family);
+    font-size: 14px; /* Keep slightly smaller or use a variable too */
+    padding: 5px;
+    outline: none;
+}
+
+.chat-send { /* Chat send button */
+    background-color: var(--terminal-bg-color);
+    color: var(--button-text-color);
+    border: none;
+    border-left: 1px solid var(--button-border-color);
+    padding: 5px 10px;
+    font-family: var(--terminal-font-family);
+    cursor: pointer;
+}
+
+.chat-send:hover {
+    background-color: var(--button-hover-bg-color);
+}
+
+/* --- Message Styling (Story & Chat Panels) --- */
+.aurora-message { /* AURORA's messages */
+    color: var(--terminal-aurora-message-color);
+    margin-bottom: 15px;
+    text-shadow: 0 0 2px var(--terminal-aurora-message-color);
+}
+
+.player-message { /* Player's messages in chat */
+    color: var(--terminal-player-message-color); 
+    margin-bottom: 15px;
+    text-shadow: 0 0 2px var(--terminal-player-message-color);
+}
+
+.system-message { /* System messages in story panel (e.g., "New command learned") */
+    color: var(--terminal-system-message-color);
+    margin-bottom: 15px;
+    font-style: italic;
+    text-shadow: 0 0 2px var(--terminal-system-message-color);
+}
+
+/* --- Objective Display Area (in Story Panel) --- */
+.objective {
+    background-color: var(--objective-bg-color);
+    border-left: 3px solid var(--objective-border-color);
+    padding: 10px;
+    min-height: 80px;
+    max-height: 100px;
+    overflow-y: auto;
+    margin-top: auto;
+    flex-shrink: 0;
+}
+
+.objective h3 { /* "Current Objective:" title */
+    color: var(--terminal-text-color); /* Themed with main text */
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+
+/* --- Command Input Line (Bottom of Screen) --- */
+#command-line {
+    display: flex;
+    margin-top: 10px;
+    background-color: var(--terminal-bg-color);
+    border: 1px solid var(--terminal-border-color);
+    box-shadow: 0 0 10px var(--terminal-shadow-color), inset 0 0 10px var(--terminal-shadow-inset-color);
+    padding: 5px;
+    position: relative; 
+}
+
+#command-prompt { /* e.g., "user@odyssey7:~$ " */
+    color: var(--terminal-prompt-color);
+    font-size: var(--terminal-font-size); /* Use themed font size */
+    margin-right: 5px;
+    text-shadow: 0 0 2px var(--terminal-prompt-color);
+}
+
+#command-input-container { /* Wrapper for input field & cursor */
+    position: relative;
+    flex-grow: 1;
+}
+
+#command-input { /* Actual text input field */
+    width: 100%;
+    background-color: transparent;
+    border: none;
+    color: var(--terminal-text-color);
+    font-family: var(--terminal-font-family);
+    font-size: var(--terminal-font-size); /* Use themed font size */
+    text-shadow: 0 0 2px var(--terminal-text-color);
+    outline: none;
+    caret-color: transparent; /* Hide browser's default caret */
+}
+
+#cursor { /* Blinking block cursor */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 8px; /* Consider making this font-size relative if fonts change drastically */
+    height: 1em; /* Use em for height related to font-size */
+    background-color: var(--terminal-cursor-color);
+    box-shadow: 0 0 5px var(--terminal-cursor-color);
+    animation: blink 1s step-end infinite;
+    pointer-events: none;
+}
+
+@keyframes blink { /* Cursor blink animation */
+    0%, 49% { opacity: 0; }
+    50%, 100% { opacity: 1; }
+}
+
+/* --- Voice Indicator (AURORA Speaking) --- */
+.voice-indicator {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    color: var(--button-text-color); /* Themed with buttons */
+    text-shadow: 0 0 5px var(--button-text-color);
+    font-size: 14px;
+}
+
+.voice-waves { /* Container for animated wave bars */
+    display: flex;
+    align-items: center;
+    height: 16px;
+    margin-left: 10px;
+}
+
+.voice-wave { /* Individual wave bar */
+    width: 2px;
+    height: 100%;
+    margin: 0 2px;
+    background-color: var(--button-text-color); /* Themed */
+    box-shadow: 0 0 5px var(--button-text-color);
+    animation: wave 1s infinite ease-in-out;
+}
+
+.voice-wave:nth-child(2) { animation-delay: 0.2s; }
+.voice-wave:nth-child(3) { animation-delay: 0.4s; }
+.voice-wave:nth-child(4) { animation-delay: 0.6s; }
+
+@keyframes wave { /* Voice wave animation */
+    0%, 100% { transform: scaleY(0.2); }
+    50% { transform: scaleY(1); }
+}
+
+/* --- Control Buttons (Help, Voice Mute) --- */
+.control-buttons {
+    position: absolute;
+    top: 20px; 
+    right: 20px; 
+    display: flex;
+    align-items: center; /* Align items vertically */
+}
+
+.control-button {
+    color: var(--button-text-color);
+    text-shadow: 0 0 5px var(--button-shadow-color);
+    background: var(--terminal-bg-color); /* Match terminal bg for select */
+    border: 1px solid var(--button-border-color);
+    padding: 5px 10px;
+    font-family: var(--terminal-font-family);
+    cursor: pointer;
+    box-shadow: 0 0 5px var(--button-shadow-color);
+    margin-left: 10px; 
+}
+
+.control-button:first-child {
+    margin-left: 0;
+}
+
+.control-button:hover {
+    background-color: var(--button-hover-bg-color);
+}
+
+/* Style the select dropdown like a button */
+#theme-selector {
+    /* Inherits .control-button styles */
+    padding-right: 25px; /* Space for dropdown arrow */
+    appearance: none; /* Remove default system appearance */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%2300FF00%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 10px;
+    color: var(--button-text-color); /* Ensure text color is applied */
+}
+
+#theme-selector option {
+    background-color: var(--terminal-bg-color);
+    color: var(--button-text-color);
+}
+
+/* Update SVG fill color based on theme */
+body[data-theme="default"] #theme-selector, body:not([data-theme]) #theme-selector {
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%2300FF00%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E');
+}
+body[data-theme="c64"] #theme-selector {
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%2388CCFF%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E');
+}
+body[data-theme="dos"] #theme-selector {
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%2300FF00%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E');
+}
+body[data-theme="linux"] #theme-selector {
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23DCDCDC%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E');
+}
+body[data-theme="appleii"] #theme-selector {
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%2330FF30%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E');
+}
+
+/* --- Help Panel (GUI popup - currently disabled via JS but styles remain) --- */
+.help-panel {
+    position: absolute;
+    top: 60px; 
+    right: 20px;
+    width: 300px;
+    background-color: #000;
+    border: 1px solid #0f0;
+    box-shadow: 0 0 10px #0f0;
+    padding: 15px;
+    color: #0f0;
+    font-size: 16px;
+    z-index: 100;
+    display: none; /* Hidden by default, JS was toggling this */
+}
+
+.help-panel h3 {
+    color: #0f0;
+    margin-top: 0;
+}
+
+.help-panel code {
+    background-color: rgba(0, 255, 0, 0.2);
+    padding: 2px 5px;
+    border-radius: 3px;
+}
+
+.help-panel ul {
+    padding-left: 20px;
+}
+
+.help-panel li {
+    margin-bottom: 5px;
+}
+
+/* --- Text Styling Classes for Terminal Output --- */
+.header-text { /* General header/title text in terminal */
+    color: #0f0;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.system-text { /* General system messages in terminal */
+    color: #0f0;
+    margin-bottom: 5px;
+}
+
+.warning-text { /* Warning messages in terminal */
+    color: #ff0; /* Yellow */
+    margin-bottom: 5px;
+}
+
+.error-text { /* Error messages in terminal output (distinct from command errors) */
+    color: #f00; /* Red */
+    margin-bottom: 5px;
+}
+
+.help-text { /* For helpful hints directly in terminal output */
+    color: #0f0;
+    font-style: italic;
+    margin-bottom: 5px;
+}
+
+/* --- Objective Hint Prompt (Below objective text in story panel) --- */
+#objective-hint-prompt { /* Text like "Ask AURORA for a hint..." */
+    font-style: italic;
+    font-size: 0.9em;
+    color: #0c0; /* Slightly dimmer green */
+    margin-top: 5px;
+}
