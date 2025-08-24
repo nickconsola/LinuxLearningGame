@@ -290,7 +290,7 @@ function checkStoryProgression(command, pathForTrigger, successStatus, gameLogic
         if (phase.actionOnSuccess) {
             console.log(`DEBUG: gameLogic.js checkStoryProgression -- Calling actionOnSuccess for phase ${gameLogic.gameState.currentStoryPhaseIndex}`);
             try {
-                phase.actionOnSuccess(gameLogic);
+                phase.actionOnSuccess(gameLogic); // Pass the whole gameLogic interface
             } catch (e) {
                 console.error(`DEBUG: gameLogic.js checkStoryProgression -- ERROR in actionOnSuccess for phase ${gameLogic.gameState.currentStoryPhaseIndex}:`, e);
             }
